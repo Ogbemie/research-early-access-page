@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REAP Community Ideas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-left">
+                <svg class="ms-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="1" width="22" height="22" fill="#f25022"/>
+                    <rect x="25" y="1" width="22" height="22" fill="#7fba00"/>
+                    <rect x="1" y="25" width="22" height="22" fill="#00a4ef"/>
+                    <rect x="25" y="25" width="22" height="22" fill="#ffb900"/>
+                </svg>
+                <span class="header-title">Research Early Access Program</span>
+            </div>
+            <nav class="header-nav">
+                <a href="index.html">Agreement</a>
+                <a href="community.html" class="active">Community Ideas</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>REAP Community Ideas</h1>
+            <p class="hero-subtitle">Share your ideas and vote for improvements to REAP models</p>
+            <button class="btn btn-primary" onclick="openSubmitModal()">Suggest an Idea</button>
+        </div>
+    </section>
+
+    <!-- Model Cards -->
+    <section class="models-section">
+        <div class="container">
+            <h2 class="section-title">REAP Models</h2>
+            <div class="model-cards">
+                <div class="model-card">
+                    <div class="model-badge badge-mmctagent">MMCTAgent</div>
+                    <h3>Multi-modal Critical Thinking Agent</h3>
+                    <p>Structured reasoning over long-form video and image collections using a Planner-Critic architecture built on AutoGen.</p>
+                    <div class="model-links">
+                        <a href="https://www.microsoft.com/en-us/research/blog/mmctagent-enabling-multimodal-reasoning-over-large-video-and-image-collections/" target="_blank" rel="noopener noreferrer">Blog</a>
+                        <a href="https://labs.ai.azure.com/projects/mmct-agent/" target="_blank" rel="noopener noreferrer">Azure AI Foundry</a>
+                        <a href="https://github.com/microsoft/MMCTAgent" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <div class="model-badge badge-paza">Paza</div>
+                    <h3>ASR for Low-Resource Languages</h3>
+                    <p>Benchmarks and fine-tuned speech recognition models for 39 African languages, starting with 6 Kenyan languages.</p>
+                    <div class="model-links">
+                        <a href="https://www.microsoft.com/en-us/research/blog/paza-introducing-automatic-speech-recognition-benchmarks-and-models-for-low-resource-languages/" target="_blank" rel="noopener noreferrer">Blog</a>
+                        <a href="https://huggingface.co/spaces/microsoft/paza-bench" target="_blank" rel="noopener noreferrer">PazaBench</a>
+                        <a href="https://huggingface.co/collections/microsoft/paza" target="_blank" rel="noopener noreferrer">Models</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ideas Section -->
+    <section class="ideas-section">
+        <div class="container">
+            <div class="ideas-header">
+                <div class="sort-tabs">
+                    <button class="tab active" data-sort="hot" onclick="setSort('hot', this)">Hot Ideas</button>
+                    <button class="tab" data-sort="top" onclick="setSort('top', this)">Top Ideas</button>
+                    <button class="tab" data-sort="new" onclick="setSort('new', this)">New Ideas</button>
+                </div>
+                <div class="filter-controls">
+                    <select id="modelFilter" onchange="filterIdeas()">
+                        <option value="all">All Models</option>
+                        <option value="MMCTAgent">MMCTAgent</option>
+                        <option value="Paza">Paza</option>
+                    </select>
+                    <select id="typeFilter" onchange="filterIdeas()">
+                        <option value="all">All Types</option>
+                        <option value="Feature Request">Feature Request</option>
+                        <option value="Bug Report">Bug Report</option>
+                        <option value="Question">Question</option>
+                        <option value="Documentation">Documentation</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="ideasList" class="ideas-list">
+                <!-- Ideas populated by JS -->
+            </div>
+
+            <div id="emptyState" class="empty-state" style="display:none;">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+                <h3>No ideas yet</h3>
+                <p>Be the first to suggest an idea for this model!</p>
+                <button class="btn btn-primary" onclick="openSubmitModal()">Suggest an Idea</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit Modal -->
+    <div id="submitModal" class="modal-overlay" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Suggest an Idea</h2>
+                <button class="modal-close" onclick="closeSubmitModal()">&times;</button>
+            </div>
+            <form id="ideaForm" onsubmit="submitIdea(event)">
+                <div class="form-group">
+                    <label for="ideaTitle">Title <span class="required">*</span></label>
+                    <input type="text" id="ideaTitle" required maxlength="200" placeholder="Brief summary of your idea">
+                </div>
+                <div class="form-group">
+                    <label for="ideaDescription">Description <span class="required">*</span></label>
+                    <textarea id="ideaDescription" required rows="5" maxlength="2000" placeholder="Describe your idea in detail. What problem does it solve? How would it work?"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ideaModel">Model <span class="required">*</span></label>
+                        <select id="ideaModel" required>
+                            <option value="">Select a model</option>
+                            <option value="MMCTAgent">MMCTAgent</option>
+                            <option value="Paza">Paza</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ideaType">Feedback Type <span class="required">*</span></label>
+                        <select id="ideaType" required>
+                            <option value="">Select type</option>
+                            <option value="Feature Request">Feature Request</option>
+                            <option value="Bug Report">Bug Report</option>
+                            <option value="Question">Question</option>
+                            <option value="Documentation">Documentation</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ideaAuthor">Your Name <span class="optional">(optional)</span></label>
+                    <input type="text" id="ideaAuthor" maxlength="100" placeholder="How should we credit you?">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeSubmitModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Submit Idea</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" style="display:none;"></div>
+
+    <footer class="footer">
+        <p>&copy; Microsoft Corporation. All rights reserved. | <a href="https://www.microsoft.com/en-us/research/project/project-gecko/" target="_blank" rel="noopener noreferrer">Project Gecko</a></p>
+    </footer>
+
+    <script src="js/fingerprint.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
