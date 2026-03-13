@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Research Early Access Program</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0078d4 0%, #004578 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            max-width: 640px;
+            width: 100%;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: #616161;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .pdf-preview {
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .pdf-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+        }
+
+        .pdf-info h3 {
+            font-size: 0.95rem;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .pdf-info p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #0078d4;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.85rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #005a9e;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #0078d4;
+            border: 2px solid #0078d4;
+            margin-left: 0.75rem;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f6ff;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            margin-top: 2rem;
+            color: #999;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Microsoft Logo -->
+        <svg class="logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="22" height="22" fill="#f25022"/>
+            <rect x="25" y="1" width="22" height="22" fill="#7fba00"/>
+            <rect x="1" y="25" width="22" height="22" fill="#00a4ef"/>
+            <rect x="25" y="25" width="22" height="22" fill="#ffb900"/>
+        </svg>
+
+        <h1>Microsoft Research Early Access Program</h1>
+        <p class="subtitle">Review and download the Early Access Agreement for the MMCTAgent research program.</p>
+
+        <div class="pdf-preview">
+            <svg class="pdf-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C9.79 2 8 3.79 8 6v36c0 2.21 1.79 4 4 4h24c2.21 0 4-1.79 4-4V14L28 2H12z" fill="#e53935"/>
+                <path d="M28 2v12h12" fill="#ef9a9a"/>
+                <text x="24" y="35" text-anchor="middle" fill="white" font-size="10" font-weight="bold" font-family="Segoe UI, sans-serif">PDF</text>
+            </svg>
+            <div class="pdf-info">
+                <h3>Microsoft Research Early Access Agreement (MMCTAgent)</h3>
+                <p>PDF Document</p>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="Microsoft%20Research%20Early%20Access%20Agreement%20(MMCTAgent).pdf" target="_blank" class="btn">View PDF</a>
+            <a href="Microsoft%20Research%20Early%20Access%20Agreement%20(MMCTAgent).pdf" download class="btn btn-secondary">Download</a>
+        </div>
+
+        <footer>
+            &copy; Microsoft Corporation. All rights reserved.
+        </footer>
+    </div>
+</body>
+</html>
