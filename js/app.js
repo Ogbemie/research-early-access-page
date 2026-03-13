@@ -237,19 +237,12 @@ async function vote(ideaId) {
 
     if (Config.ENDPOINTS.POST_VOTE) {
         try {
-            const res = await fetch(Config.ENDPOINTS.POST_VOTE, {
+            await fetch(Config.ENDPOINTS.POST_VOTE, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ideaId, fingerprint })
+                body: JSON.stringify({ ideaId, fingerprint }),
+                mode: 'no-cors'
             });
-            const result = await res.json();
-            if (result.status === 'already_voted') {
-                votedIds.add(ideaId);
-                saveVotes();
-                renderIdeas();
-                showToast('You have already voted for this idea.', 'error');
-                return;
-            }
         } catch {
             showToast('Vote failed. Please try again.', 'error');
             return;
@@ -318,12 +311,12 @@ async function submitIdea(e) {
 
     if (Config.ENDPOINTS.POST_IDEA) {
         try {
-            const res = await fetch(Config.ENDPOINTS.POST_IDEA, {
+            await fetch(Config.ENDPOINTS.POST_IDEA, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newIdea)
+                body: JSON.stringify(newIdea),
+                mode: 'no-cors'
             });
-            if (!res.ok) throw new Error('Submit failed');
         } catch {
             showToast('Failed to submit idea. Saved locally.', 'error');
         }
