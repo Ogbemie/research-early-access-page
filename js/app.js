@@ -12,9 +12,9 @@ const Config = {
     // Replace these with your Power Automate HTTP trigger URLs once created
     API_BASE: null, // e.g. 'https://prod-xx.westus.logic.azure.com:443/workflows/...'
     ENDPOINTS: {
-        GET_IDEAS: null,   // GET  – returns ideas JSON
-        POST_IDEA: null,   // POST – creates new idea
-        POST_VOTE: null    // POST – records vote
+        GET_IDEAS: 'https://f850afab6a60e2719d9ab2b2dfc20a.12.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/85c2ccc3c8284161af9b7b51e7d67e6c/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=kBtV970Q0DY4uLzLDeHmYsf4zO8d42s5HyxGlMNAqo0',
+        POST_IDEA: 'https://f850afab6a60e2719d9ab2b2dfc20a.12.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/8f0d30da20e54ae5a473ebc214412da0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=iUqF77zxSSTChO1LCQlOweJ3bCgJNftF1E4hdzT6PMI',
+        POST_VOTE: 'https://f850afab6a60e2719d9ab2b2dfc20a.12.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/43d424c296834e92ad1a33c45055aa6e/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ET9eJf5eBZUcuvQah-Z1l5d9VH0nHxN04inT_TVNbWw'
     },
     STORAGE_KEYS: {
         IDEAS: 'reap_ideas',
