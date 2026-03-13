@@ -239,9 +239,8 @@ async function vote(ideaId) {
         try {
             await fetch(Config.ENDPOINTS.POST_VOTE, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ideaId, fingerprint }),
-                mode: 'no-cors'
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({ ideaId, fingerprint })
             });
         } catch {
             showToast('Vote failed. Please try again.', 'error');
@@ -313,9 +312,8 @@ async function submitIdea(e) {
         try {
             await fetch(Config.ENDPOINTS.POST_IDEA, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newIdea),
-                mode: 'no-cors'
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify(newIdea)
             });
         } catch {
             showToast('Failed to submit idea. Saved locally.', 'error');
