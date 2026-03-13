@@ -53,8 +53,17 @@ async function loadIdeas() {
             if (modelFilter !== 'all') params.set('model', modelFilter);
             if (typeFilter !== 'all') params.set('type', typeFilter);
 
-            const res = await fetch(`${Config.ENDPOINTS.GET_IDEAS}?${params}`);
-            allIdeas = await res.json();
+            const res = await fetch(Config.ENDPOINTS.GET_IDEAS);
+            const raw = await res.json();
+            // Normalize data from Power Automate / SharePoint
+            allIdeas = raw.map(idea => ({
+                ...idea,
+                feedbackType: typeof idea.feedbackType === 'object' ? idea.feedbackType.Value : idea.feedbackType,
+                model: typeof idea.model === 'object' ? idea.model.Value : idea.model,
+                status: typeof idea.status === 'object' ? idea.status.Value : idea.status,
+                voteCount: parseInt(idea.voteCount) || 0,
+                submittedDate: idea.submittedDate || idea.created || new Date().toISOString()
+            }));
         } catch {
             showToast('Failed to load ideas. Using local data.', 'error');
             allIdeas = getLocalIdeas();
@@ -239,7 +248,7 @@ async function vote(ideaId) {
         try {
             await fetch(Config.ENDPOINTS.POST_VOTE, {
                 method: 'POST',
-                headers: { 'Content-Type': 'text/plain' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ideaId, fingerprint })
             });
         } catch {
@@ -312,7 +321,7 @@ async function submitIdea(e) {
         try {
             await fetch(Config.ENDPOINTS.POST_IDEA, {
                 method: 'POST',
-                headers: { 'Content-Type': 'text/plain' },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newIdea)
             });
         } catch {
